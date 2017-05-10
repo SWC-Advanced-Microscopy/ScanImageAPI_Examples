@@ -1,6 +1,7 @@
 # ScanImageAPI_Examples
 
 Examples showing how to interact with ScanImage using its API and user functions. 
+You should also check out [Vidrio's tutorial on the API](http://scanimage.vidriotechnologies.com/display/SI2016/ScanImage+API%3A+Creating+a+simple+user+interface).
 
 ### Installation
 
@@ -12,3 +13,7 @@ At the top of the file are comments describing how the simulated hardware are to
 
 ### Running the examples
 See the help text at the top of each example to see how to run it. 
+
+### What's included?
+* Intro to User Functions: helloScanImage.m, meanFrame.m
+* Reading ScanImage settings via the API: reportChannels.m
