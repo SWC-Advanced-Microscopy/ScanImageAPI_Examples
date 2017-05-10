@@ -12,15 +12,17 @@ function meanFrame(src,event,varargin)
     % * Press Focus
     %
     % In simulated mode you will see a sine wave.
-    
+
     hSI = src.hSI; % get the handle to the ScanImage model
-    
+    maxPoints=50;
+
     persistent plotData
     switch event.EventName
-           
+
         case 'focusStart'
             % Look for a figure window that contains data from a previous
-            % run of meanFrame. Make one if it doesn't exist
+            % run of meanFrame. Make one if it doesn't exist, wipe it if it
+            % does. 
             hFig = findobj(0,'Name','meanFramePlot');
             if isempty(hFig)
                 hFig = figure;
@@ -28,17 +30,18 @@ function meanFrame(src,event,varargin)
             end
             figure(hFig)
             tmpC = cla;
-            
-            plotData=plot(tmpC, nan); %Plot a nan
+
+            plotData=plot(tmpC, nan,'-r','LineWidth',2); %Plot a nan
             grid on
+            xlim([0,maxPoints+1])
             fprintf('Focus mode started\n')
-            
+
         case 'frameAcquired'
             % Pull in data from the first depth of the first channel
             lastFrame = hSI.hDisplay.stripeDataBuffer{1}.roiData{1}.imageData{1}{1};
             plotData.YData(end+1)=mean(lastFrame(:));
-            if length(plotData.YData)>50
-                plotData.YData = plotData.YData(end-49:end);
+            if length(plotData.YData)>maxPoints
+                plotData.YData = plotData.YData(end-maxPoints+1:end);
             end
     end % switch
 
