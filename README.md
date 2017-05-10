@@ -16,4 +16,4 @@ See the help text at the top of each example to see how to run it.
 
 ### What's included?
 * Intro to User Functions: helloScanImage.m, meanFrame.m
-* Reading ScanImage settings via the API: reportChannels.m
+* Reading ScanImage settings via the API: reportChannels.m, basicListenerDemo.m
