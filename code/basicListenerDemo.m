@@ -42,11 +42,10 @@ classdef basicListenerDemo < handle
         function isAcquiring(obj,~,~)
             % Callback function that runs when the ScanImage acquisition state changes
             if obj.hSI.active == true
-                fprintf('ScanImage started is acquiring frames\n')
+                fprintf('ScanImage has started acquiring frames\n')
             else
-                fprintf('ScanImage stopped acquiring frames\n')
+                fprintf('ScanImage has stopped acquiring frames\n')
             end
-            obj.hSI.active
         end %isAcquiring
 
 
