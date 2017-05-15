@@ -10,13 +10,16 @@ function meanFrame(src,event,varargin)
     % * Ensure all are enabled
     % * Acquire data on channel 1
     % * Press Focus
+    % * Try pressing Abort then focus again. See how the figure is cleared
+    %   first before data are added. 
     %
     % In simulated mode you will see a sine wave.
 
     hSI = src.hSI; % get the handle to the ScanImage model
     maxPoints=50;
 
-    persistent plotData
+    persistent plotData %Retains data between function calls
+
     switch event.EventName
 
         case 'focusStart'
@@ -34,7 +37,6 @@ function meanFrame(src,event,varargin)
             plotData=plot(tmpC, nan,'-r','LineWidth',2); %Plot a nan
             grid on
             xlim([0,maxPoints+1])
-            fprintf('Focus mode started\n')
 
         case 'frameAcquired'
             % Pull in data from the first depth of the first channel

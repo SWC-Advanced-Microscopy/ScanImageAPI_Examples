@@ -1,9 +1,9 @@
-classdef basicListenerDemo < handle
+classdef frameDoneDemo < handle
     % Reports actions taking place within ScanImage 
     %
     % Instructions
     % * Start ScanImage 
-    % * Start an instance of this class: L = basicListenerDemo;
+    % * Start an instance of this class: F=frameDoneDemo;
     % * Press Focus
 
 
@@ -14,7 +14,7 @@ classdef basicListenerDemo < handle
 
 
     methods
-        function obj = basicListenerDemo
+        function obj = frameDoneDemo
             % Pull in ScanImage API handle
             scanimageObjectName='hSI';
             W = evalin('base','whos');
@@ -27,8 +27,8 @@ classdef basicListenerDemo < handle
             obj.hSI = evalin('base',scanimageObjectName); % get hSI from the base workspace
 
 
-            %Add a listener to the observable property "active" of the hSI object. 
-            obj.listeners{1} = addlistener(obj.hSI, 'active', 'PostSet', @obj.isAcquiring);
+            %Add some listeners
+            obj.listeners{1} = addlistener(obj.hSI.hUserFunctions ,'frameAcquired', @(src,evt) obj.fAcq(src,evt));
             % obj.listeners{n}  % More listeners can be added here. 
         end
 
@@ -39,14 +39,10 @@ classdef basicListenerDemo < handle
         end
 
 
-        function isAcquiring(obj,~,~)
-            % Callback function that runs when the ScanImage acquisition state changes
-            if obj.hSI.active == true
-                fprintf('ScanImage started is acquiring frames\n')
-            else
-                fprintf('ScanImage stopped acquiring frames\n')
-            end
-            obj.hSI.active
+        function fAcq(obj,~,~)
+            % Callback fAcq that runs when the ScanImage acquisition state changes
+            dataBuffer = obj.hSI.hDisplay.stripeDataBuffer{1};
+            fprintf('Acquired frame %d\n',dataBuffer.frameNumberAcq)
         end %isAcquiring
 
 

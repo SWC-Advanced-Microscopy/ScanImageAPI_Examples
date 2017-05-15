@@ -1,5 +1,5 @@
 function reportChannels
-    % Reports which ScanImage channels are active
+    % Simple function that uses the ScanImage API to report which channels are active
     %
     % Instructions
     % * Start ScanImage 
@@ -8,10 +8,10 @@ function reportChannels
 
 
 
-    % Pull in ScanImage API handle
+    % Pull in ScanImage API handle from the base workspace
     scanimageObjectName='hSI';
     W = evalin('base','whos');
-    if ~ismember(scanimageObjectName,{W.name});
+    if ~ismember(scanimageObjectName,{W.name})
         fprintf('Can not find ScanImage API handle in base workspace. Please start ScanImage\n')
         return
     end
