@@ -14,6 +14,7 @@ classdef basicListenerDemo < handle
 
 
     methods
+
         function obj = basicListenerDemo
             % Pull in ScanImage API handle
             scanimageObjectName='hSI';
@@ -30,13 +31,13 @@ classdef basicListenerDemo < handle
             %Add a listener to the observable property "active" of the hSI object. 
             obj.listeners{1} = addlistener(obj.hSI, 'active', 'PostSet', @obj.isAcquiring);
             % obj.listeners{n}  % More listeners can be added here. 
-        end
+        end % close constructor
 
 
         function delete(obj)
             %Detach from the listeners (they won't be cleaned up unless they are explicitly deleted)
             cellfun(@delete,obj.listeners)
-        end
+        end % close destructor
 
 
         function isAcquiring(obj,~,~)
@@ -44,11 +45,11 @@ classdef basicListenerDemo < handle
             if obj.hSI.active == true
                 fprintf('ScanImage has started acquiring frames\n')
             else
-                fprintf('ScanImage has stopped acquiring frames\n')
+                fprintf('ScanImage has stopped acquiring frames\n') %TODO: this never runs. odd
             end
-        end %isAcquiring
+        end % close isAcquiring
 
 
-    end %close methods block
+    end % close methods block
 
 end % close classdef

@@ -27,25 +27,25 @@ classdef frameDoneDemo < handle
             obj.hSI = evalin('base',scanimageObjectName); % get hSI from the base workspace
 
 
-            %Add some listeners
-            obj.listeners{1} = addlistener(obj.hSI.hUserFunctions ,'frameAcquired', @(src,evt) obj.fAcq(src,evt));
+             % Add a listener to the the notifier that fires when a frame is acquired. This is the notifier used for user functions
+            obj.listeners{1} = addlistener(obj.hSI.hUserFunctions ,'frameAcquired', @obj.fAcq);
             % obj.listeners{n}  % More listeners can be added here. 
-        end
+        end % close constructor
 
 
         function delete(obj)
             %Detach from the listeners (they won't be cleaned up unless they are explicitly deleted)
             cellfun(@delete,obj.listeners)
-        end
+        end % close destructor
 
 
         function fAcq(obj,~,~)
             % Callback fAcq that runs when the ScanImage acquisition state changes
             dataBuffer = obj.hSI.hDisplay.stripeDataBuffer{1};
             fprintf('Acquired frame %d\n',dataBuffer.frameNumberAcq)
-        end %isAcquiring
+        end % fAcq
 
 
-    end %close methods block
+    end % close methods block
 
 end % close classdef
