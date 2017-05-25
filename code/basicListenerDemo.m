@@ -5,6 +5,8 @@ classdef basicListenerDemo < handle
     % * Start ScanImage 
     % * Start an instance of this class: L = basicListenerDemo;
     % * Press Focus
+    %
+    % To clean up run: delete(L)
 
 
     properties
@@ -27,7 +29,6 @@ classdef basicListenerDemo < handle
 
             obj.hSI = evalin('base',scanimageObjectName); % get hSI from the base workspace
 
-
             %Add a listener to the observable property "active" of the hSI object. 
             obj.listeners{1} = addlistener(obj.hSI, 'active', 'PostSet', @obj.isAcquiring);
             % obj.listeners{n}  % More listeners can be added here. 
@@ -48,7 +49,6 @@ classdef basicListenerDemo < handle
                 fprintf('ScanImage has stopped acquiring frames\n') %TODO: this never runs. odd
             end
         end % close isAcquiring
-
 
     end % close methods block
 

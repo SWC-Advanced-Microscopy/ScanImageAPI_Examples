@@ -5,6 +5,9 @@ classdef frameDoneDemo < handle
     % * Start ScanImage 
     % * Start an instance of this class: F=frameDoneDemo;
     % * Press Focus
+    %
+    % To clean up run: delete(F)
+
 
 
     properties
@@ -14,6 +17,7 @@ classdef frameDoneDemo < handle
 
 
     methods
+
         function obj = frameDoneDemo
             % Pull in ScanImage API handle
             scanimageObjectName='hSI';
@@ -26,8 +30,8 @@ classdef frameDoneDemo < handle
 
             obj.hSI = evalin('base',scanimageObjectName); % get hSI from the base workspace
 
-
-             % Add a listener to the the notifier that fires when a frame is acquired. This is the notifier used for user functions
+            % Add a listener to the the notifier that fires when a frame is acquired. 
+            % This is the same notifier used for user functions.
             obj.listeners{1} = addlistener(obj.hSI.hUserFunctions ,'frameAcquired', @obj.fAcq);
             % obj.listeners{n}  % More listeners can be added here. 
         end % close constructor
@@ -44,7 +48,6 @@ classdef frameDoneDemo < handle
             dataBuffer = obj.hSI.hDisplay.stripeDataBuffer{1};
             fprintf('Acquired frame %d\n',dataBuffer.frameNumberAcq)
         end % fAcq
-
 
     end % close methods block
 

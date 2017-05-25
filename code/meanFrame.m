@@ -1,4 +1,5 @@
 function meanFrame(src,event,varargin)
+
     % Instructions:
     %
     % * Add the directory containing this function to your path
