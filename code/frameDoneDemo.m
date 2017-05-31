@@ -1,13 +1,14 @@
 classdef frameDoneDemo < handle
-    % Reports actions taking place within ScanImage 
+    % Reports actions taking place within ScanImage to the command line
     %
     % Instructions
     % * Start ScanImage 
     % * Start an instance of this class: F=frameDoneDemo;
-    % * Press Focus
+    % * Press Focus. Note messages at command line.
+    % * To clean up run: delete(F)
     %
-    % To clean up run: delete(F)
-
+    % 
+    % Rob Campbell - 2017
 
 
     properties

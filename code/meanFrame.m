@@ -1,5 +1,14 @@
 function meanFrame(src,event,varargin)
-
+    % Tutorial ScanImage user function - extracting data from a frame
+    %
+    % function meanFrame(src,event,varargin)
+    %
+    % Purpose
+    % Makes a Plots mean frame intensity over time for channel 1.
+    % Chart is cleared every time focus is pressed. Chart scrolls 
+    % once 50 data points have been acquired. 
+    %
+    %
     % Instructions:
     %
     % * Add the directory containing this function to your path
@@ -9,7 +18,7 @@ function meanFrame(src,event,varargin)
     %   frameAcquired
     %
     % * Ensure all are enabled
-    % * Acquire data on channel 1
+    % * Set up to acquire data on channel 1
     % * Press Focus
     % * Try pressing Abort then focus again. See how the figure is cleared
     %   first before data are added. 
@@ -17,7 +26,7 @@ function meanFrame(src,event,varargin)
     % In simulated mode you will see a sine wave.
 
     hSI = src.hSI; % get the handle to the ScanImage model
-    maxPoints=50;
+    maxPoints=50;  % chart starts to scroll once this many points have been acquired
 
     persistent plotData %Retains data between function calls
 
@@ -35,7 +44,7 @@ function meanFrame(src,event,varargin)
             figure(hFig)
             tmpC = cla;
 
-            plotData=plot(tmpC, nan,'-r','LineWidth',2); %Plot a nan
+            plotData=plot(tmpC, nan, '-r', 'LineWidth', 2); %Plot a nan
             grid on
             xlim([0,maxPoints+1])
 

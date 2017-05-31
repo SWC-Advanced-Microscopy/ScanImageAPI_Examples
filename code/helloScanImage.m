@@ -1,10 +1,20 @@
 function helloScanImage(src,event,varargin)
+    % Tutorial ScanImage user function
+    %
+    % function helloScanImage(src,event,varargin)
+    %
+    % 
+    % Purpose
+    % Prints messages to screen when the user starts and stops Focus
+    % and acquires data.
+    %
+    % 
     % Instructions:
     %
     % * Add the directory containing this function to your path
     % * In ScanImage go to Settings > User Functions and press "Add"
     %   to assign "helloScanImage" (by just entering the function name
-    %   under the "User Function" columb) to the Events:
+    %   under the "User Function" column) to the Events:
     %   focusStart
     %   focusDone
     %   acqModeStart

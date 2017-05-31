@@ -1,12 +1,14 @@
 classdef basicListenerDemo < handle
-    % Reports actions taking place within ScanImage 
+    % Reports actions taking place within ScanImage to the command line
     %
     % Instructions
     % * Start ScanImage 
     % * Start an instance of this class: L = basicListenerDemo;
-    % * Press Focus
+    % * Press Focus then Abort. Note messages at command line.
+    % * To clean up run: delete(L)
     %
-    % To clean up run: delete(L)
+    % 
+    % Rob Campbell - 2017
 
 
     properties
@@ -29,8 +31,8 @@ classdef basicListenerDemo < handle
 
             obj.hSI = evalin('base',scanimageObjectName); % get hSI from the base workspace
 
-            %Add a listener to the observable property "active" of the hSI object. 
-            obj.listeners{1} = addlistener(obj.hSI, 'active', 'PostSet', @obj.isAcquiring);
+            %Add a listener to the observable property "acqState" of the hSI object. 
+            obj.listeners{1} = addlistener(obj.hSI, 'acqState', 'PostSet', @obj.isAcquiring);
             % obj.listeners{n}  % More listeners can be added here. 
         end % close constructor
 
@@ -43,11 +45,7 @@ classdef basicListenerDemo < handle
 
         function isAcquiring(obj,~,~)
             % Callback function that runs when the ScanImage acquisition state changes
-            if obj.hSI.active == true
-                fprintf('ScanImage has started acquiring frames\n')
-            else
-                fprintf('ScanImage has stopped acquiring frames\n') %TODO: this never runs. odd
-            end
+            fprintf('Current acquisition state is: %s\n', obj.hSI.acqState)
         end % close isAcquiring
 
     end % close methods block
