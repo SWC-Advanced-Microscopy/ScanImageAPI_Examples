@@ -1,5 +1,5 @@
 classdef frameDoneDemo < handle
-    % Reports actions taking place within ScanImage to the command line
+    % Reports each acquired frame to the command line
     %
     % Instructions
     % * Start ScanImage 
